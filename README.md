@@ -92,7 +92,7 @@ Tables:
 | `ACCESS_TOKEN_EXPIRE_MINUTES` | How long a login token stays valid | `60` |
 | `AI_PROVIDER` | `gemini`, `openai`, `anthropic` or `mock` | `gemini` |
 | `AI_API_KEY` | Your API key for that provider | (your own key) |
-| `AI_MODEL` | Optional model name, empty = provider default | `gemini-2.5-flash` |
+| `AI_MODEL` | Optional model name, empty = provider default | `gemini-3.8-flash` |
 | `AI_TIMEOUT_SECONDS` | How long to wait for the AI provider | `30` |
 
 
