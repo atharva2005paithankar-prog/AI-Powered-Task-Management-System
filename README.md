@@ -33,23 +33,29 @@ Python 3.11 or newer (developed on 3.12).
 ## Setup instructions
 
 1. Create and activate a virtual environment
+
 python -m venv venv
 source venv/bin/activate          # Windows: venv\Scripts\activate
 
 2. Install dependencies
+
 pip install -r requirements.txt
 
 3. Start PostgreSQL (option A: Docker, option B: your own install, see "Database configuration")
+
 docker compose up -d
 
 4. Create your .env file and edit it (secret key + AI settings)
+
 cp .env.example .env              # Windows: copy .env.example .env
 
 5. Create the tables, then add test users and sample tasks
+
 python -m app.database.init_db
 python -m app.database.seed
 
 6. Run the app
+
 uvicorn app.main:app --reload
 
 Then open:
