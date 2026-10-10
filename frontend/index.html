@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docket - AI task management</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- ===================== Sign in / Create account ===================== -->
+  <main id="auth-view" class="auth" hidden>
+    <section class="auth-intro">
+      <h1>Docket</h1>
+      <p class="auth-lead">Keep every task moving, and let AI write the details.</p>
+      <ol class="flow" aria-label="Task statuses">
+        <li><span class="dot s-pending"></span>Pending</li>
+        <li><span class="dot s-progress"></span>In Progress</li>
+        <li><span class="dot s-testing"></span>Testing</li>
+        <li><span class="dot s-completed"></span>Completed</li>
+      </ol>
+    </section>
+
+    <section class="auth-panel">
+      <div class="tabs" role="tablist">
+        <button type="button" role="tab" id="tab-login" aria-selected="true">Sign in</button>
+        <button type="button" role="tab" id="tab-register" aria-selected="false">Create account</button>
+      </div>
+
+      <form id="login-form" class="form" novalidate>
+        <label>Email<input type="email" name="email" autocomplete="username" required></label>
+        <label>Password<input type="password" name="password" autocomplete="current-password" required></label>
+        <p class="form-error" id="login-error" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+
+      <form id="register-form" class="form" novalidate hidden>
+        <label>Name<input type="text" name="name" autocomplete="name" required minlength="2"></label>
+        <label>Email<input type="email" name="email" autocomplete="username" required></label>
+        <label>Password<input type="password" name="password" autocomplete="new-password" required minlength="8">
+          <small>At least 8 characters.</small></label>
+        <p class="form-error" id="register-error" role="alert" hidden></p>
+        <button type="submit" class="btn btn-primary">Create account</button>
+      </form>
+
+      <div class="test-accounts">
+        <p>Test accounts from the seeder</p>
+        <div>
+          <button type="button" class="btn btn-quiet" data-fill="admin@example.com|Admin@123">Fill admin</button>
+          <button type="button" class="btn btn-quiet" data-fill="user@example.com|User@123">Fill user</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================== Task board ===================== -->
+  <div id="app-view" hidden>
+    <header class="topbar">
+      <span class="brand">Docket</span>
+      <div class="who">
+        <span id="user-name"></span>
+        <span id="user-role" class="role-badge"></span>
+        <button type="button" class="btn btn-quiet" id="logout-btn">Sign out</button>
+      </div>
+    </header>
+
+    <main class="board-wrap">
+      <div class="toolbar">
+        <div>
+          <h2 id="board-title">Tasks</h2>
+          <p id="board-subtitle" class="muted"></p>
+        </div>
+        <button type="button" class="btn btn-primary" id="new-task-btn">New task</button>
+      </div>
+      <div id="board" class="board"></div>
+    </main>
+  </div>
+
+  <!-- ===================== Create / edit dialog ===================== -->
+  <dialog id="task-dialog">
+    <form id="task-form" class="form" novalidate>
+      <h2 id="dialog-title">New task</h2>
+      <label>Title
+        <input type="text" id="task-title" maxlength="200" required placeholder="For example: Design the login page">
+      </label>
+      <label>Description
+        <textarea id="task-description" rows="7" maxlength="5000" placeholder="Describe the task, or let AI draft it from the title"></textarea>
+      </label>
+      <div class="ai-row">
+        <button type="button" class="btn btn-ai" id="ai-draft-btn">Draft description with AI</button>
+        <small class="muted">Uses the title. You can edit the result.</small>
+      </div>
+      <p class="form-error" id="task-error" role="alert" hidden></p>
+      <div class="dialog-actions">
+        <button type="button" class="btn btn-quiet" id="cancel-btn">Cancel</button>
+        <button type="submit" class="btn btn-primary" id="save-btn">Save task</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+# Optional: starts a local PostgreSQL database for development.
+#   docker compose up -d
+# The values below are LOCAL DEVELOPMENT defaults only. Change them via environment variables if you like.
+services:
+  db:
+    image: postgres:16
+    container_name: task_manager_db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: ${POSTGRES_DB:-task_manager}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
